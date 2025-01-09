@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/forms";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --font-sans: var(--font-geist-sans);
+  --font-serif: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-background: var(--color-black);
+  --color-foreground: var(--color-white);
+}
+
+@variant container (screen(max-width: 1380px));
+
+@layer base {
+  head,
+  body {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+}
