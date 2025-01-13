@@ -1,64 +1,72 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+/**
+ * @file ESLint configuration file.
+ *
+ * This configuration includes `eslint-plugin-tailwindcss` but comments it out
+ * due to compatibility issues with Tailwind CSS v4 beta. Once Tailwind CSS v4
+ * reaches a stable release and compatibility with `eslint-plugin-tailwindcss`
+ * is confirmed, uncomment the plugin for optimal Tailwind CSS linting support.
+ *
+ * @note Remember to revisit this file after upgrading Tailwind CSS to a stable version.
+ */
 
-import tailwindcss from "eslint-plugin-tailwindcss";
+import createConfig from '@antfu/eslint-config'
+import next from '@next/eslint-plugin-next'
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const explicitModuleBoundaryTypes = {
-  allowedNames: ["Page", "Layout"],
-};
-
-const twOptions = {
-  callees: ["clsx", "cva", "cn"],
-  classRegex: "^class(Name)?$",
-
-  // white list any classname which does NOT start with `bg-` and `text-`
-  whitelist: ["((bg|text)\\-).*"],
-};
-
-const eslintConfig = [
-  ...compat.extends(
-    "next",
-    "next/core-web-vitals",
-    "next/typescript",
-    "plugin:prettier/recommended"
-  ),
-  ...tailwindcss.configs["flat/recommended"],
+export default createConfig(
   {
+    name: 'kyuar:base',
+    type: 'app',
+
+    stylistic: {
+      indent: 2,
+      jsx: false,
+    },
+
+    formatters: {
+      css: true,
+      html: true,
+      svg: true,
+      xml: true,
+      markdown: 'dprint',
+    },
+
+    react: true,
+    typescript: true,
+    gitignore: true,
+    jsx: true,
+
+    test: true,
+    markdown: true,
+    regexp: true,
+  },
+  {
+    name: 'kyuar:next:base',
+    plugins: { '@next/next': next },
+
     rules: {
-      "react/prop-types": ["off"],
-      "react/react-in-jsx-scope": ["off"],
-      "@typescript-eslint/explicit-module-boundary-types": [
-        "error",
-        explicitModuleBoundaryTypes,
-      ],
-
-      "@typescript-eslint/no-unused-vars": [
-        "error",
-        {
-          argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_",
-          destructuredArrayIgnorePattern: "^_",
-        },
-      ],
-
-      "tailwindcss/classnames-order": ["error", twOptions],
-      "tailwindcss/enforces-negative-arbitrary-values": ["error", twOptions],
-      "tailwindcss/enforces-shorthand": ["error", twOptions],
-      "tailwindcss/migration-from-tailwind-2": ["error", twOptions],
-      "tailwindcss/no-contradicting-classname": ["error", twOptions],
-      "tailwindcss/no-custom-classname": ["error", twOptions],
-      "tailwindcss/no-unnecessary-arbitrary-value": ["error", twOptions],
+      // warnings
+      '@next/next/google-font-display': 'warn',
+      '@next/next/google-font-preconnect': 'warn',
+      '@next/next/next-script-for-ga': 'warn',
+      '@next/next/no-async-client-component': 'warn',
+      '@next/next/no-before-interactive-script-outside-document': 'warn',
+      '@next/next/no-css-tags': 'warn',
+      '@next/next/no-head-element': 'warn',
+      '@next/next/no-html-link-for-pages': 'warn',
+      '@next/next/no-img-element': 'warn',
+      '@next/next/no-page-custom-font': 'warn',
+      '@next/next/no-styled-jsx-in-document': 'warn',
+      '@next/next/no-sync-scripts': 'warn',
+      '@next/next/no-title-in-document-head': 'warn',
+      '@next/next/no-typos': 'warn',
+      '@next/next/no-unwanted-polyfillio': 'warn',
+      // errors
+      '@next/next/inline-script-id': 'error',
+      '@next/next/no-assign-module-variable': 'error',
+      '@next/next/no-document-import-in-page': 'error',
+      '@next/next/no-duplicate-head': 'error',
+      '@next/next/no-head-import-in-document': 'error',
+      '@next/next/no-script-component-in-head': 'error',
     },
   },
-];
-
-export default eslintConfig;
+)
