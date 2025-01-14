@@ -1,3 +1,3 @@
 export function mergeParagraph(...paragraphs: string[]): string {
-  return paragraphs.join(' ')
+  return paragraphs.filter(Boolean).join(' ').trim()
 }

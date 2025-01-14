@@ -12,6 +12,12 @@
 
 # testing
 /coverage
+/tests/browser/__screenshots__
+
+# Vitest
+vitest.*
+!vitest.config.mts
+!vitest.workspace.mts
 
 # next.js
 /.next/
