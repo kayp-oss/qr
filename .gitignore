@@ -17,7 +17,7 @@
 # Vitest
 vitest.*
 !vitest.config.mts
-!vitest.workspace.mts
+!vitest.workspace.ts
 
 # next.js
 /.next/
