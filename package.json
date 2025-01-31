@@ -1,10 +1,11 @@
 {
-  "name": "with-svelte",
+  "name": "kyuar",
   "private": true,
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
+    "preview": "turbo run preview",
     "format": "prettier --write ."
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "vscode": "^1.22.0"
   }
 }

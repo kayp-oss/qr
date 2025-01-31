@@ -1,0 +1,10 @@
+{
+    "name": "@kyuar/api",
+    "private": true,
+    "description": "",
+    "scripts": {
+        "dev": "cargo watch -x run",
+        "build": "cargo build --release",
+        "preview": ".\\target\\release\\kyuar-api.exe"
+    }
+}
